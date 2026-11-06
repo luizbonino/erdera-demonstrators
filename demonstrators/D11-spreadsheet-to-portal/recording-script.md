@@ -14,4 +14,7 @@ Target length five to seven minutes. Fill in the timings after the dry run.
 | 8    | The demo Discovery Portal, search for the disease, the registry appears   | And here it is, findable next to the biobanks and registries that are already there.                    |      |
 | 9    | Closing slide, contrast with the FDP Populator route                      | Before, this needed a running FDP, credentials stored as secrets and a workflow to run.                 |      |
 
-Measured during the dry run: time from publish to appearance in the portal ___ minutes.
+Measured during the headless dry run (2026-11-06): time from publish to the
+entry being ACTIVE in the demo index, about 6 minutes, nearly all of it the
+first Pages build. Time to appearance in a portal: to be measured once a demo
+portal reads the demo index.

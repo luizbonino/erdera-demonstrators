@@ -30,18 +30,40 @@ lists how.
 
 ## Steps
 
-1. Demo index accepts a GitHub Pages FDP. Configure the demo VP Index on the
-   testbed to accept pings from the demo organisation's Pages domain and
-   confirm with a hand-made FDPlight project that the FDP is listed as active
-   and its resources appear in the demo portal.
-2. Repository and Pages. Create a repository under the demo organisation with
-   Pages enabled on the branch FDPlight publishes to, and a fine-grained token
-   scoped to it (Contents, Workflows, Pull requests).
-3. Dry run with the fixture, on camera. Note the time between publish and
-   appearance in the portal.
-4. Co-owner review with the patient organisation. Adjust wording to their
+Done (2026-11-06):
+
+1. Demo index. The demo VP Index on the testbed
+   (<https://fair-testbed.eemcs.utwente.nl/demo-index>, `infra/demo-index`)
+   accepts unauthorised pings from GitHub Pages FDPs and accepts new entries
+   automatically.
+2. Repository and Pages. The synthetic organisation's FDP lives in
+   `luizbonino/synthetic-rkpa-fdp` (personal account for now), with Pages on
+   `main`, served at <https://luizbonino.github.io/synthetic-rkpa-fdp/>.
+3. Dry run, headless (`dry-run/publish-fdp.ts`). With FDPlight's own code
+   (the spreadsheet import, branch `spreadsheet-import` until merged): an
+   ERDERA project whose root is filled as in the guided setup, the fixture
+   workbook imported with zero red counts, one commit. The Pages build
+   triggered FDPlight's ping workflow and the demo index harvested the FDP,
+   the catalog and the patient registry (ACTIVE). The VP's Level 1 query,
+   with the two rewrites FDPlight's SPEC §9.6 describes, lists all three.
+   Publish to ACTIVE took about six minutes, nearly all of it the first Pages
+   build.
+
+   Pitfall for the recording: switching Pages on starts a build of the
+   current commit. Publishing during that build cancels it, and the ping for
+   the cancelled build is skipped; the next build pings. Switch Pages on
+   first and let that build finish, or simply wait for the second ping.
+
+Still to do:
+
+4. The import in the live app: review and merge the FDPlight pull request.
+5. A demo Discovery Portal on the testbed that reads the demo index. Until
+   then the recording can end on the index entry and its harvested records.
+6. Dry run on camera in the app, with a fine-grained token scoped to the
+   repository (Contents, Workflows, Pull requests).
+7. Co-owner review with the patient organisation. Adjust wording to their
    vocabulary. Their reaction to the red counts is the most informative moment.
-5. Record five to seven minutes, closing with the contrast to the FDP
+8. Record five to seven minutes, closing with the contrast to the FDP
    Populator route (deployed FDP, credentials as GitHub secrets, a workflow).
 
 ## Acceptance

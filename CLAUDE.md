@@ -173,10 +173,15 @@ Tasks 1 to 4 are done (6 November 2026). See the D5 README for the detail.
      population coverage value (exactly two red counts on the right fields),
      and the TSV form importing identically to the xlsx. Plus a check that
      the generated Turtle validates against the ERDERA SHACL shapes.
-3. Demo index accepting Pages pings, repository and Pages for the demo
-   organisation, dry run, co-owner review, recording. Steps and acceptance in
-   `demonstrators/D11-spreadsheet-to-portal/README.md` and
-   `recording-script.md`.
+   Built on 6 November 2026 on FDPlight's local branch `spreadsheet-import`
+   (SPEC v0.14 §4.4 and §9.7, 252 tests, build 1,242 kB / 425 kB gzip with
+   SheetJS 0.20.3 from its CDN). Not pushed: merging deploys the live app, so
+   the pull request waits for Luiz.
+3. Demo index, repository (`luizbonino/synthetic-rkpa-fdp`, Pages on) and a
+   headless dry run are done: the fixture imports with zero red counts and
+   the demo index harvested it. Still to do: merge the import, a demo
+   Discovery Portal on the testbed, the dry run on camera, co-owner review,
+   recording. Steps in `demonstrators/D11-spreadsheet-to-portal/README.md`.
 
 ## Rules that apply to all work here
 
