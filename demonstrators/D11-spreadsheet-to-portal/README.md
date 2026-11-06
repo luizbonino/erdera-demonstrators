@@ -15,17 +15,18 @@ holds what the demonstrator needs around it.
 ## Layout
 
 ```
-fixtures/synthetic-registry/   the ERDERA template filled for a fictional
-                               patient-organisation registry, one TSV per sheet
-                               (the template README recommends TSV export).
-                               Also fixture 1 of the FDPlight import tests.
+fixtures/synthetic-registry/   the official ERDERA template filled for a
+                               fictional patient-organisation registry, as an
+                               xlsx and as one TSV per sheet (the template
+                               README recommends TSV export). Also fixture 1
+                               of the FDPlight import tests.
 recording-script.md            the walkthrough, step by step, with timings to fill in
 ```
 
-The TSV column headers follow the per-sheet documentation of the
-[ERDERA template](https://github.com/ejp-rd-vp/resource-metadata-schema/blob/master/template/README.md).
-Before use, copy the values into the official `.xlsx` template as well, so the
-import is tested against both the xlsx and the TSV form.
+Both forms follow the official workbook of the
+[ERDERA template](https://github.com/ejp-rd-vp/resource-metadata-schema/blob/master/template/README.md),
+which differs from its per-sheet documentation in places; the fixture README
+lists how.
 
 ## Steps
 

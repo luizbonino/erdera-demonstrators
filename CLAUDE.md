@@ -105,9 +105,6 @@ around the tools.
 
 ## Not yet verified (the planning session had no PyPI and no access to the FDP hosts)
 
-- The official `.xlsx` template could not be downloaded. The D11 fixture is
-  TSV only, with column headers taken from the per-sheet documentation. Copy
-  the values into the official workbook and keep both forms.
 
 ## Tasks, in order
 
@@ -139,8 +136,12 @@ Tasks 1 to 4 are done (6 November 2026). See the D5 README for the detail.
 
 ### D11
 
-1. ORDO code verified (`Orphanet_93545`). Still to do: the xlsx form of the
-   fixture, from the official template.
+1. Done (6 November 2026). ORDO code verified (`Orphanet_93545`). The
+   official workbook is downloadable after all
+   (ejp-rd-vp/resource-metadata-schema `74df189`, CC0); it differs from the
+   per-sheet docs, so the TSVs now follow the workbook and `build_xlsx.py`
+   writes the same values into it. The quirks an importer must handle are in
+   the fixture README.
 2. In `~/GitHub/FDPlight` (separate repository, shares code with Contour),
    read how the ERDERA profile is defined, how form state is held in memory
    and how IRIs are minted from the base URI. Then add the import as three
