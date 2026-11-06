@@ -1,0 +1,26 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ejprd: <http://purl.org/ejp-rd/vocabulary/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# A dataset record shaped like one an FDP with the ERDERA profile would serve.
+# {BASE} is replaced by the test with the address of the local fixture server.
+
+<{BASE}/dataset.ttl>
+    a dcat:Dataset, dcat:Resource ;
+    dct:title "Synthetic CAKUT amniotic fluid proteome (fixture)" ;
+    dct:description "A small synthetic table standing in for the EJPRD WP13 CAKUT proteome. Fixture for the D5 demonstrator tests." ;
+    dct:publisher <{BASE}/organisation.ttl> ;
+    dct:license <https://w3id.org/ejp-rd/resources/licenses/v1.0/> ;
+    dct:accessRights <https://w3id.org/ejp-rd/resources/licenses/v1.0/> ;
+    dcat:landingPage <{BASE}/landing.html> ;
+    dcat:theme <http://www.orpha.net/ORDO/Orphanet_93546> ;
+    dcat:keyword "CAKUT", "proteome", "synthetic" ;
+    ejprd:personalData "false" ;
+    ejprd:vpConnection <https://w3id.org/ejp-rd/vocabulary#VPDiscoverable> ;
+    dcat:distribution <{BASE}/distribution.ttl> .
+
+<{BASE}/organisation.ttl>
+    a foaf:Organization ;
+    foaf:name "Synthetic Rare Kidney Research Group" .
