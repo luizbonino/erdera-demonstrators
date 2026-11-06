@@ -1,0 +1,42 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix dcat: <http://www.w3.org/ns/dcat#>.
+@prefix fdp: <https://w3id.org/fdp/fdp-o#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix datacite: <http://purl.org/spar/datacite/>.
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#>.
+@prefix ejp: <https://w3id.org/ejp-rd/vocabulary#>.
+
+<https://luizbonino.github.io/erdera-demonstrators/fdp/distribution/d5-prov.ttl> a dcat:Distribution, dcat:Resource;
+    dct:accessRights <https://luizbonino.github.io/erdera-demonstrators/fdp/distribution/d5-prov.ttl#accessRights>;
+    dct:conformsTo <https://luizbonino.github.io/erdera-demonstrators/fdp/profile/distribution.ttl>;
+    dct:description "What the notebook used (dataset record, distribution record, data URL) and what it produced."@en;
+    dct:format <http://publications.europa.eu/resource/authority/file-type/RDF_TURTLE>;
+    dct:isPartOf <https://luizbonino.github.io/erdera-demonstrators/fdp/dataset/d5-huntington-first-look.ttl>;
+    dct:language <http://id.loc.gov/vocabulary/iso639-1/en>;
+    dct:license <https://creativecommons.org/licenses/by/4.0/>;
+    dct:publisher <https://luizbonino.github.io/erdera-demonstrators/fdp/distribution/d5-prov.ttl#publisher>;
+    dct:rights <https://creativecommons.org/licenses/by/4.0/>;
+    dct:title "PROV-O record of the run"@en;
+    rdfs:label "PROV-O record of the run";
+    dcat:accessURL <https://luizbonino.github.io/erdera-demonstrators/demonstrators/D05-metadata-to-notebook/output/prov.ttl>;
+    dcat:byteSize "2126"^^xsd:nonNegativeInteger;
+    dcat:contactPoint <https://luizbonino.github.io/erdera-demonstrators/fdp/distribution/d5-prov.ttl#contactPoint>;
+    dcat:keyword "ERDERA demonstrator", "Huntington disease", "transcriptomics";
+    dcat:theme <http://edamontology.org/topic_3308>, <http://www.orpha.net/ORDO/Orphanet_399>;
+    ejp:vpConnection ejp:VPDiscoverable;
+    fdp:metadataIdentifier <https://luizbonino.github.io/erdera-demonstrators/fdp/distribution/d5-prov.ttl#identifier>;
+    fdp:metadataIssued "2026-11-06T13:12:39.722Z"^^xsd:dateTime;
+    fdp:metadataModified "2026-11-06T13:12:39.722Z"^^xsd:dateTime.
+<https://luizbonino.github.io/erdera-demonstrators/fdp/distribution/d5-prov.ttl#accessRights> a dct:RightsStatement;
+    dct:description "This resource has no access restriction".
+<https://luizbonino.github.io/erdera-demonstrators/fdp/distribution/d5-prov.ttl#contactPoint> a vcard:Agent;
+    vcard:url <https://github.com/luizbonino/erdera-demonstrators/issues>.
+<https://luizbonino.github.io/erdera-demonstrators/fdp/distribution/d5-prov.ttl#identifier> a datacite:Identifier;
+    dct:identifier "https://luizbonino.github.io/erdera-demonstrators/fdp/distribution/d5-prov.ttl".
+<https://luizbonino.github.io/erdera-demonstrators/fdp/distribution/d5-prov.ttl#publisher> a foaf:Organization;
+    dct:description "Demonstrators of the ERDERA Virtual Platform, maintained at the University of Twente (Task 13.2).";
+    dcat:landingPage <https://github.com/luizbonino/erdera-demonstrators>;
+    foaf:name "ERDERA demonstrators, University of Twente".
+<https://luizbonino.github.io/erdera-demonstrators/fdp/profile/distribution.ttl> rdfs:label "Distribution Profile".

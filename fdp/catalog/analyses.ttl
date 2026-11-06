@@ -1,0 +1,48 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix dcat: <http://www.w3.org/ns/dcat#>.
+@prefix fdp: <https://w3id.org/fdp/fdp-o#>.
+@prefix ldp: <http://www.w3.org/ns/ldp#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix datacite: <http://purl.org/spar/datacite/>.
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#>.
+@prefix ejp: <https://w3id.org/ejp-rd/vocabulary#>.
+
+<https://luizbonino.github.io/erdera-demonstrators/fdp/catalog/analyses.ttl> a dcat:Catalog, dcat:Resource;
+    dct:accessRights <https://luizbonino.github.io/erdera-demonstrators/fdp/catalog/analyses.ttl#accessRights>;
+    dct:conformsTo <https://luizbonino.github.io/erdera-demonstrators/fdp/profile/catalog.ttl>;
+    dct:description "Results of the notebooks of the ERDERA demonstrators, with the notebook, its figures and the provenance of each run."@en;
+    dct:isPartOf <https://luizbonino.github.io/erdera-demonstrators/fdp/fdp.ttl>;
+    dct:issued "2026-11-06T13:12:39.722Z"^^xsd:dateTime;
+    dct:language <http://id.loc.gov/vocabulary/iso639-1/en>;
+    dct:license <https://creativecommons.org/publicdomain/zero/1.0/>;
+    dct:modified "2026-11-06T13:12:39.722Z"^^xsd:dateTime;
+    dct:publisher <https://luizbonino.github.io/erdera-demonstrators/fdp/catalog/analyses.ttl#publisher>;
+    dct:title "Demonstrator analyses"@en;
+    rdfs:label "Demonstrator analyses";
+    dcat:contactPoint <https://luizbonino.github.io/erdera-demonstrators/fdp/catalog/analyses.ttl#contactPoint>;
+    dcat:dataset <https://luizbonino.github.io/erdera-demonstrators/fdp/dataset/d5-huntington-first-look.ttl>;
+    dcat:keyword "ERDERA", "demonstrator", "notebook";
+    dcat:landingPage <https://github.com/luizbonino/erdera-demonstrators>;
+    dcat:theme <http://www.wikidata.org/entity/Q929833>;
+    ejp:vpConnection ejp:VPDiscoverable;
+    fdp:metadataIdentifier <https://luizbonino.github.io/erdera-demonstrators/fdp/catalog/analyses.ttl#identifier>;
+    fdp:metadataIssued "2026-11-06T13:12:39.722Z"^^xsd:dateTime;
+    fdp:metadataModified "2026-11-06T13:12:39.722Z"^^xsd:dateTime.
+<https://luizbonino.github.io/erdera-demonstrators/fdp/catalog/analyses.ttl#accessRights> a dct:RightsStatement;
+    dct:description "This resource has no access restriction".
+<https://luizbonino.github.io/erdera-demonstrators/fdp/catalog/analyses.ttl#contactPoint> a vcard:Agent;
+    vcard:url <https://github.com/luizbonino/erdera-demonstrators/issues>.
+<https://luizbonino.github.io/erdera-demonstrators/fdp/catalog/analyses.ttl#dataset> a ldp:DirectContainer;
+    dct:title "Datasets";
+    ldp:contains <https://luizbonino.github.io/erdera-demonstrators/fdp/dataset/d5-huntington-first-look.ttl>;
+    ldp:hasMemberRelation dcat:dataset;
+    ldp:membershipResource <https://luizbonino.github.io/erdera-demonstrators/fdp/catalog/analyses.ttl>.
+<https://luizbonino.github.io/erdera-demonstrators/fdp/catalog/analyses.ttl#identifier> a datacite:Identifier;
+    dct:identifier "https://luizbonino.github.io/erdera-demonstrators/fdp/catalog/analyses.ttl".
+<https://luizbonino.github.io/erdera-demonstrators/fdp/catalog/analyses.ttl#publisher> a foaf:Organization;
+    dct:description "Demonstrators of the ERDERA Virtual Platform, maintained at the University of Twente (Task 13.2).";
+    dcat:landingPage <https://github.com/luizbonino/erdera-demonstrators>;
+    foaf:name "ERDERA demonstrators, University of Twente".
+<https://luizbonino.github.io/erdera-demonstrators/fdp/profile/catalog.ttl> rdfs:label "Catalog Profile".

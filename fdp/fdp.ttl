@@ -1,0 +1,48 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix dcat: <http://www.w3.org/ns/dcat#>.
+@prefix fdp: <https://w3id.org/fdp/fdp-o#>.
+@prefix ldp: <http://www.w3.org/ns/ldp#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix datacite: <http://purl.org/spar/datacite/>.
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#>.
+@prefix ejp: <https://w3id.org/ejp-rd/vocabulary#>.
+
+<https://luizbonino.github.io/erdera-demonstrators/fdp/fdp.ttl> a dcat:Resource, fdp:FAIRDataPoint, fdp:MetadataService;
+    dct:accessRights <https://luizbonino.github.io/erdera-demonstrators/fdp/fdp.ttl#accessRights>;
+    dct:conformsTo <https://luizbonino.github.io/erdera-demonstrators/fdp/profile/fdp.ttl>;
+    dct:description "Analyses produced by the ERDERA Virtual Platform demonstrators, each registered with the data it came from. Published with FDPlight as a file-only FAIR Data Point."@en;
+    dct:language <http://id.loc.gov/vocabulary/iso639-1/en>;
+    dct:license <https://creativecommons.org/publicdomain/zero/1.0/>;
+    dct:publisher <https://luizbonino.github.io/erdera-demonstrators/fdp/fdp.ttl#publisher>;
+    dct:title "ERDERA demonstrator outputs"@en;
+    rdfs:label "ERDERA demonstrator outputs";
+    dcat:contactPoint <https://luizbonino.github.io/erdera-demonstrators/fdp/fdp.ttl#contactPoint>;
+    dcat:endpointURL <https://luizbonino.github.io/erdera-demonstrators/fdp/fdp.ttl>;
+    dcat:keyword "ERDERA", "Virtual Platform", "demonstrator";
+    dcat:landingPage <https://github.com/luizbonino/erdera-demonstrators>;
+    dcat:theme <http://www.wikidata.org/entity/Q929833>;
+    ejp:vpConnection ejp:VPDiscoverable;
+    fdp:conformsToFdpSpec <https://w3id.org/fdp/fdp-o/1.2>;
+    fdp:fdpSoftwareVersion "FDPlight:0.1.0";
+    fdp:metadataCatalog <https://luizbonino.github.io/erdera-demonstrators/fdp/catalog/analyses.ttl>;
+    fdp:metadataIdentifier <https://luizbonino.github.io/erdera-demonstrators/fdp/fdp.ttl#identifier>;
+    fdp:metadataIssued "2026-11-06T13:12:39.722Z"^^xsd:dateTime;
+    fdp:metadataModified "2026-11-06T13:12:39.722Z"^^xsd:dateTime.
+<https://luizbonino.github.io/erdera-demonstrators/fdp/fdp.ttl#accessRights> a dct:RightsStatement;
+    dct:description "This resource has no access restriction".
+<https://luizbonino.github.io/erdera-demonstrators/fdp/fdp.ttl#catalog> a ldp:DirectContainer;
+    dct:title "Catalogs";
+    ldp:contains <https://luizbonino.github.io/erdera-demonstrators/fdp/catalog/analyses.ttl>;
+    ldp:hasMemberRelation fdp:metadataCatalog;
+    ldp:membershipResource <https://luizbonino.github.io/erdera-demonstrators/fdp/fdp.ttl>.
+<https://luizbonino.github.io/erdera-demonstrators/fdp/fdp.ttl#contactPoint> a vcard:Agent;
+    vcard:url <https://github.com/luizbonino/erdera-demonstrators/issues>.
+<https://luizbonino.github.io/erdera-demonstrators/fdp/fdp.ttl#identifier> a datacite:Identifier;
+    dct:identifier "https://luizbonino.github.io/erdera-demonstrators/fdp/fdp.ttl".
+<https://luizbonino.github.io/erdera-demonstrators/fdp/fdp.ttl#publisher> a foaf:Organization;
+    dct:description "Demonstrators of the ERDERA Virtual Platform, maintained at the University of Twente (Task 13.2).";
+    dcat:landingPage <https://github.com/luizbonino/erdera-demonstrators>;
+    foaf:name "ERDERA demonstrators, University of Twente".
+<https://luizbonino.github.io/erdera-demonstrators/fdp/profile/fdp.ttl> rdfs:label "FAIR Data Point Profile".

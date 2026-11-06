@@ -1,0 +1,57 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix dcat: <http://www.w3.org/ns/dcat#>.
+@prefix fdp: <https://w3id.org/fdp/fdp-o#>.
+@prefix ldp: <http://www.w3.org/ns/ldp#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix datacite: <http://purl.org/spar/datacite/>.
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#>.
+@prefix ejp: <https://w3id.org/ejp-rd/vocabulary#>.
+@prefix prov: <http://www.w3.org/ns/prov#>.
+
+<https://luizbonino.github.io/erdera-demonstrators/fdp/dataset/d5-huntington-first-look.ttl> a dcat:Dataset, dcat:Resource;
+    <http://data.europa.eu/healthdcat-ap#hdab> <http://example.org/hdab/national-health-authority-de>;
+    <http://data.europa.eu/healthdcat-ap#healthCategory> <http://data.europa.eu/healthdcat-ap/vocabulary#RareDiseaseData>;
+    <http://data.europa.eu/healthdcat-ap#healthTheme> <http://www.wikidata.org/entity/Q55789681>;
+    dct:accessRights <https://luizbonino.github.io/erdera-demonstrators/fdp/dataset/d5-huntington-first-look.ttl#accessRights>;
+    dct:conformsTo <https://luizbonino.github.io/erdera-demonstrators/fdp/profile/dataset.ttl>;
+    dct:description "A first two-group look at GEO GSE64810 (Labadorf et al. 2015, 20 Huntington disease and 49 control prefrontal cortex samples): genes ranked by the difference of mean log2(count + 1). Produced by the ERDERA D5 notebook, which reached the data from the EJP RD WP13 FAIR Data Point record alone. A first look, not a differential expression analysis."@en;
+    dct:isPartOf <https://luizbonino.github.io/erdera-demonstrators/fdp/catalog/analyses.ttl>;
+    dct:language <http://id.loc.gov/vocabulary/iso639-1/en>;
+    dct:license <https://creativecommons.org/licenses/by/4.0/>;
+    dct:provenance <http://example.org/provenance/rare-disease-registry-how-we-collect>, <https://luizbonino.github.io/erdera-demonstrators/demonstrators/D05-metadata-to-notebook/output/prov.ttl>;
+    dct:publisher <https://luizbonino.github.io/erdera-demonstrators/fdp/dataset/d5-huntington-first-look.ttl#publisher>;
+    dct:spatial <http://data.europa.eu/nuts/code/EU>;
+    dct:title "D5 first look: Huntington disease transcriptomics (GSE64810)"@en;
+    dct:type <http://data.europa.eu/930/dataset-type/PERSONAL_DATA>;
+    rdfs:label "D5 first look: Huntington disease transcriptomics (GSE64810)";
+    <http://www.w3.org/ns/adms#sample> <https://luizbonino.github.io/erdera-demonstrators/demonstrators/D05-metadata-to-notebook/output/top_differences.png>;
+    dcat:contactPoint <https://luizbonino.github.io/erdera-demonstrators/fdp/dataset/d5-huntington-first-look.ttl#contactPoint>;
+    dcat:distribution <https://luizbonino.github.io/erdera-demonstrators/fdp/distribution/d5-figure.ttl>, <https://luizbonino.github.io/erdera-demonstrators/fdp/distribution/d5-notebook.ttl>, <https://luizbonino.github.io/erdera-demonstrators/fdp/distribution/d5-prov.ttl>;
+    dcat:keyword "ERDERA demonstrator", "Huntington disease", "RNA-Seq", "transcriptomics";
+    dcat:landingPage <https://github.com/luizbonino/erdera-demonstrators/tree/main/demonstrators/D05-metadata-to-notebook>;
+    dcat:theme <http://edamontology.org/topic_3308>, <http://www.orpha.net/ORDO/Orphanet_399>;
+    prov:wasDerivedFrom <https://w3id.org/ejp-rd/fairdatapoints/wp13/dataset/22238845-1213-43f6-a60f-e84cdc9fa2ed>;
+    <https://w3id.org/dpv#hasPersonalData> <https://w3id.org/dpv#HealthData>;
+    <https://w3id.org/dpv#hasPurpose> <https://w3id.org/dpv#ResearchAndDevelopment>;
+    ejp:vpConnection ejp:VPDiscoverable;
+    fdp:metadataIdentifier <https://luizbonino.github.io/erdera-demonstrators/fdp/dataset/d5-huntington-first-look.ttl#identifier>;
+    fdp:metadataIssued "2026-11-06T13:12:39.722Z"^^xsd:dateTime;
+    fdp:metadataModified "2026-11-06T13:12:39.722Z"^^xsd:dateTime.
+<https://luizbonino.github.io/erdera-demonstrators/fdp/dataset/d5-huntington-first-look.ttl#accessRights> a dct:RightsStatement;
+    dct:description "This resource has no access restriction".
+<https://luizbonino.github.io/erdera-demonstrators/fdp/dataset/d5-huntington-first-look.ttl#contactPoint> a vcard:Agent;
+    vcard:url <https://github.com/luizbonino/erdera-demonstrators/issues>.
+<https://luizbonino.github.io/erdera-demonstrators/fdp/dataset/d5-huntington-first-look.ttl#distribution> a ldp:DirectContainer;
+    dct:title "Distributions";
+    ldp:contains <https://luizbonino.github.io/erdera-demonstrators/fdp/distribution/d5-figure.ttl>, <https://luizbonino.github.io/erdera-demonstrators/fdp/distribution/d5-notebook.ttl>, <https://luizbonino.github.io/erdera-demonstrators/fdp/distribution/d5-prov.ttl>;
+    ldp:hasMemberRelation dcat:distribution;
+    ldp:membershipResource <https://luizbonino.github.io/erdera-demonstrators/fdp/dataset/d5-huntington-first-look.ttl>.
+<https://luizbonino.github.io/erdera-demonstrators/fdp/dataset/d5-huntington-first-look.ttl#identifier> a datacite:Identifier;
+    dct:identifier "https://luizbonino.github.io/erdera-demonstrators/fdp/dataset/d5-huntington-first-look.ttl".
+<https://luizbonino.github.io/erdera-demonstrators/fdp/dataset/d5-huntington-first-look.ttl#publisher> a foaf:Organization;
+    dct:description "Demonstrators of the ERDERA Virtual Platform, maintained at the University of Twente (Task 13.2).";
+    dcat:landingPage <https://github.com/luizbonino/erdera-demonstrators>;
+    foaf:name "ERDERA demonstrators, University of Twente".
+<https://luizbonino.github.io/erdera-demonstrators/fdp/profile/dataset.ttl> rdfs:label "Dataset Profile".
