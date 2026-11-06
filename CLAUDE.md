@@ -33,8 +33,17 @@ around the tools.
   (`AGENT_IRI` in `src/vpfollow.py`) points there; GitHub redirects a
   transferred repository, but update the constant if it moves.
 - Testbed server for the demo VP Index and Discovery Portal is
-  `fair-testbed.eemcs.utwente.nl`. Nothing in this repository writes to the
+  `fair-testbed.eemcs.utwente.nl` (Ubuntu 24.04, reached over eduVPN, ssh as
+  `luiz`; Docker and anything under `/opt` need sudo with a password, so root
+  steps are run by Luiz). Its only public host name is that one. The Caddy
+  front proxy of the pid-relay stack (`/opt/pid-relay/deploy`, from
+  `luizbonino/pid-relay`) holds ports 80 and 443 and routes by path; new
+  services join the `pid-relay_default` network and get a `handle` block in
+  pid-relay's `deploy/Caddyfile`. Nothing in this repository writes to the
   production VP at `vp.erdera.org`.
+- The demo VP Index is `infra/demo-index`, served at
+  `https://fair-testbed.eemcs.utwente.nl/demo-index`. Its README has the
+  deploy steps.
 - The planning documents (demonstrator plan, D5 and D11 implementation plan)
   are Claude artifacts that this session cannot read. Their substance is in
   the demonstrator READMEs and in this file. Ask Luiz if something is missing.
@@ -80,6 +89,11 @@ around the tools.
   PXD022926 is about 100 GB of raw MS files with no processed table. The
   CAKUT mirnome (Zenodo, CC BY 4.0, 817 KB) and Huntington transcriptomics
   (GEO GSE64810, 12.7 MB) both have working `dcat:downloadURL`s.
+- The demo VP Index (stock FDP 1.22.2 in index mode, auto-permit on)
+  accepts an unauthorised JSON ping from a GitHub Pages FDP and harvests it:
+  tested in local Docker on 6 November 2026 with the WP13.3 ProQolid FDP,
+  through the same Caddy route as on the testbed. Ping both `/demo-index`
+  and `/demo-index/`; neither redirects.
 - ORDO has no single CAKUT class. The fixtures use `Orphanet_93545` "Renal or
   urinary tract malformation", the group that covers it (checked in EBI OLS).
   `Orphanet_399` is Huntington disease.
@@ -93,9 +107,6 @@ around the tools.
 - The official `.xlsx` template could not be downloaded. The D11 fixture is
   TSV only, with column headers taken from the per-sheet documentation. Copy
   the values into the official workbook and keep both forms.
-- Whether the demo VP Index on the testbed accepts pings from a GitHub Pages
-  FDP without authorisation (the production index requires it, which is why
-  FDPlight was tested against `home.fairdatapoint.org`).
 
 ## Tasks, in order
 

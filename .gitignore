@@ -8,3 +8,5 @@ venv/
 demonstrators/**/downloads/
 demonstrators/*/notebook/output/
 .DS_Store
+infra/demo-index/.env
+infra/demo-index/admin-credentials*

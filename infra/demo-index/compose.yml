@@ -1,0 +1,90 @@
+# ERDERA demo VP Index on fair-testbed.eemcs.utwente.nl
+#
+# A FAIR Data Point in index mode, served at PUBLIC_URL by the Caddy front
+# proxy of the pid-relay stack. Only the client joins that stack's network;
+# the FDP itself is published on 127.0.0.1:8083 for the bootstrap script and
+# for checks from the server. See README.md.
+name: erdera-demo-index
+
+services:
+  fdp:
+    image: fairdata/fairdatapoint:1.22.2
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8083:80"
+    environment:
+      INSTANCE_CLIENTURL: ${PUBLIC_URL:?PUBLIC_URL must be set}
+      INSTANCE_PERSISTENTURL: ${PUBLIC_URL:?PUBLIC_URL must be set}
+      INSTANCE_TITLE: ERDERA demo VP Index (testbed)
+      INSTANCE_INDEX: "true"
+      # New entries are accepted, and harvested, without an admin step.
+      INSTANCE_INDEXAUTOPERMIT: "true"
+      # The index does not register itself anywhere.
+      PING_ENABLED: "false"
+      # Native store on a volume, so harvested metadata survive a restart.
+      REPOSITORY_TYPE: "2"
+      REPOSITORY_NATIVE_DIR: /fdp/store
+      SECURITY_JWT_TOKEN_SECRETKEY: ${FDP_JWT_SECRET_KEY:?FDP_JWT_SECRET_KEY must be set}
+    volumes:
+      - fdp-store:/fdp/store
+    healthcheck:
+      # the fdp listens on port 80 in the default production profile
+      test: wget --quiet --spider http://127.0.0.1:80 || exit 1
+      interval: 1m
+      start_interval: 3s
+      start_period: 90s
+    depends_on:
+      mongo:
+        condition: service_healthy
+      fdp-store-init:
+        condition: service_completed_successfully
+
+  # The FDP runs as spring (uid 100, gid 101), and /fdp/store does not exist in
+  # the image, so Docker creates the volume owned by root and the native store
+  # cannot lock it. Hand it over before the FDP starts.
+  fdp-store-init:
+    image: busybox:1.37
+    command: chown -R 100:101 /fdp/store
+    volumes:
+      - fdp-store:/fdp/store
+    restart: "no"
+
+  client:
+    image: fairdata/fairdatapoint-client:1.18.1
+    restart: unless-stopped
+    environment:
+      FDP_HOST: fdp
+      PUBLIC_PATH: ${PUBLIC_PATH:?PUBLIC_PATH must be set}
+    networks:
+      default:
+      proxy:
+        # the name Caddy proxies to
+        aliases: [erdera-demo-index-client]
+    healthcheck:
+      test: wget --quiet --spider http://127.0.0.1 || exit 1
+      interval: 1m
+      start_interval: 3s
+      start_period: 30s
+    depends_on:
+      fdp:
+        condition: service_healthy
+
+  mongo:
+    image: mongo:8.2.12
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: mongosh --quiet --eval "db.runCommand('ping').ok" || exit 1
+      interval: 1m
+      start_interval: 3s
+      start_period: 30s
+
+networks:
+  proxy:
+    external: true
+    name: pid-relay_default
+
+volumes:
+  fdp-store:
+  mongo-data:

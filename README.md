@@ -30,6 +30,9 @@ demonstrators/
   D05-metadata-to-notebook/     D5: notebook, library, fixtures, tests
   D11-spreadsheet-to-portal/    D11: fixtures and the recording script; the
                                 import feature itself lives in FDPlight
+infra/
+  demo-index/                   the demo VP Index on the testbed, where
+                                demonstrators register their FDPs
 ```
 
 ## Conventions
