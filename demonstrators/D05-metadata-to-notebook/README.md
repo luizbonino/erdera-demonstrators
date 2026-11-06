@@ -58,15 +58,30 @@ Done (2026-11-06):
    figure may be redistributed, so the executed notebook, figure and PROV
    record are committed under `output/`.
 
+4. Registered the output as a resource in a file-only FAIR Data Point, built
+   with FDPlight's code and ERDERA profile (`register/publish-fdp.ts`). The
+   FDP is in `fdp/` of this repository, served by GitHub Pages at
+   <https://luizbonino.github.io/erdera-demonstrators/fdp/fdp.ttl>. A Dataset
+   "D5 first look: Huntington disease transcriptomics (GSE64810)" with
+   `prov:wasDerivedFrom` the WP13 record and three distributions (executed
+   notebook, figure, PROV record). FDPlight's ping workflow announced it to
+   the demo VP Index after the Pages deployment, and the index harvested all
+   six records (ACTIVE, 2026-11-06). `vpfollow.follow()` reaches the files
+   from the new dataset IRI as it does from the WP13 one.
+
+   The ERDERA profile has no software type, hence a Dataset. Its shape fixes
+   eight values with `sh:hasValue`, so the record carries them although some
+   are wrong for an aggregate analysis of public data; see `records.md`.
+
 Still to do:
 
-4. Register the notebook as a resource in the demo index with FDPlight (ERDERA
-   profile), so the recording ends with the analysis itself being findable.
-   This needs a public URL for the notebook (this repository on GitHub) and
-   the testbed demo index.
 5. Record five minutes, portal row to figure, opening with what the portal
-   shows and what it does not. Worth showing on the way: the Huntington
-   record's publisher IRI, a file path left by the populator script.
+   shows and what it does not. End on the demo index entry for the output.
+   Worth showing on the way: the Huntington record's publisher IRI, a file
+   path left by the populator script.
+
+To re-publish after a change, see the header of `register/publish-fdp.ts`,
+or open the repository (folder `fdp/`) in the FDPlight app.
 
 ## Acceptance
 

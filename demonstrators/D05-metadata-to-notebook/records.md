@@ -130,3 +130,28 @@ FDP maintainers.
    download.
 5. **Typos in keywords.** "amniotic fluit" (CAKUT), "Hungtington disease",
    "trancriptomics".
+
+## ERDERA schema issues found while registering the output
+
+ERDERA's dataset shape (ERDERA/FDP-Reference-Implementation-Configuration,
+as bundled in FDPlight's ERDERA profile) fixes eight properties with
+`sh:hasValue`, so no dataset is valid without these values, whatever it
+describes. FDPlight refuses to publish an invalid record, so the D5 output
+record carries all of them.
+
+| Property | Fixed value | Problem |
+| --- | --- | --- |
+| `healthdcatap:healthTheme` | `wikidata:Q55789681` | The field says "default is 'rare disease'", but Q55789681 is "benign neoplasm of ciliary body". Rare disease is Q929833. Every ERDERA-valid dataset claims this theme. |
+| `healthdcatap:hdab` | `http://example.org/hdab/national-health-authority-de` | A placeholder, labelled "Germany is selected as an example default". |
+| `dct:provenance` | `http://example.org/provenance/rare-disease-registry-how-we-collect` | A placeholder. The D5 record adds its real PROV record next to it. |
+| `dct:type` | `dataset-type/PERSONAL_DATA` | Wrong for an aggregate analysis of public data. |
+| `dpv:hasPersonalData` | `dpv:HealthData` | Same. |
+| `healthdcatap:healthCategory` | `RareDiseaseData` | Fine here. |
+| `dct:spatial` | `nuts/code/EU` | Fine here. |
+| `dpv:hasPurpose` | `dpv:ResearchAndDevelopment` | Fine here. |
+
+`sh:hasValue` requires the value to be present, so a record can add correct
+values but cannot drop the fixed ones. The fix belongs in ERDERA's shapes:
+`sh:defaultValue` (or a form default) instead of `sh:hasValue`, and Q929833
+for rare disease.
+

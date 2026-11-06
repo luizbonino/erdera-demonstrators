@@ -128,8 +128,14 @@ Tasks 1 to 4 are done (6 November 2026). See the D5 README for the detail.
    comparison is in `src/firstlook.py`.
 4. Done. The executed notebook, figure and PROV record are committed under
    `output/`, with attribution in `output/README.md`.
-5. Still to do. Register the notebook as a resource in the demo index with
-   FDPlight once the demo index exists, then record (README step 5).
+5. Registration done (6 November 2026): `register/publish-fdp.ts` builds a
+   file-only FDP in `fdp/` with FDPlight's code and ERDERA profile, served by
+   GitHub Pages; its ping workflow points at the demo index, which harvested
+   it. Still to do: the recording (README step 5).
+   ERDERA's dataset shape fixes eight values with `sh:hasValue`, including a
+   wrong Wikidata health theme (Q55789681, "benign neoplasm of ciliary body",
+   labelled "rare disease"). Listed in `records.md`; to be reported to the
+   shape maintainers.
 
 ### D11
 
