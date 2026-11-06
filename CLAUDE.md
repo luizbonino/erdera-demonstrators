@@ -92,7 +92,8 @@ around the tools.
 - The demo VP Index (stock FDP 1.22.2 in index mode, auto-permit on)
   accepts an unauthorised JSON ping from a GitHub Pages FDP and harvests it:
   tested in local Docker on 6 November 2026 with the WP13.3 ProQolid FDP,
-  through the same Caddy route as on the testbed. Ping both `/demo-index`
+  through the same Caddy route as on the testbed, and again on the live
+  testbed after the deploy the same day (entry ACCEPTED and ACTIVE). Ping both `/demo-index`
   and `/demo-index/`; neither redirects.
 - ORDO has no single CAKUT class. The fixtures use `Orphanet_93545` "Renal or
   urinary tract malformation", the group that covers it (checked in EBI OLS).

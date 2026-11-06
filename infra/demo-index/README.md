@@ -90,3 +90,8 @@ WP13.3 ProQolid FDP on GitHub Pages
 (`https://erdera.github.io/WP13.3_document_based_fdp/sites/proqolid/eprovide_fdp.ttl`)
 answered 204 at both `/demo-index` and `/demo-index/`, and the entry became
 ACCEPTED and ACTIVE.
+
+Deployed on the testbed on 2026-11-06. Checked from outside: the record and
+the client answer at `/demo-index`, both default passwords are refused, the
+same ping gives an ACCEPTED and ACTIVE entry, and pid-relay still answers
+(`/pid-manager/`, and a `/pid/` rule redirects with 303).
