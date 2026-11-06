@@ -13,19 +13,25 @@ from __future__ import annotations
 import gzip
 import mimetypes
 import os
+import re
 import shutil
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Iterable
-from urllib.parse import urlparse
+from urllib.parse import unquote, urlparse
 
 import requests
 from rdflib import Graph, Literal, Namespace, URIRef
-from rdflib.namespace import DCAT, DCTERMS, FOAF, PROV, RDF, XSD
+from rdflib.namespace import DCAT, DCTERMS, FOAF, PROV, RDF, RDFS, XSD
 
 EJPRD = Namespace("http://purl.org/ejp-rd/vocabulary/")
 VCARD = Namespace("http://www.w3.org/2006/vcard/ns#")
+
+# Where this demonstrator's code lives, used as the PROV agent. In Luiz's
+# personal GitHub account for now; it may move to the ERDERA organisation,
+# and GitHub redirects transferred repositories.
+AGENT_IRI = "https://github.com/luizbonino/erdera-demonstrators/tree/main/demonstrators/D05-metadata-to-notebook"
 
 ACCEPT = (
     "text/turtle;q=1.0, application/ld+json;q=0.9, "
@@ -105,22 +111,21 @@ class DistributionRecord:
 
 def describe_dataset(graph: Graph, iri: str) -> DatasetRecord:
     s = URIRef(iri)
-    publisher = _first(graph, s, DCTERMS.publisher)
+    publisher = next(graph.objects(s, DCTERMS.publisher), None)
     publisher_name = None
-    if publisher:
-        publisher_name = _first(graph, URIRef(publisher), FOAF.name) or _first(
-            graph, URIRef(publisher), DCTERMS.title
-        )
+    if publisher is not None:
+        # The publisher is often a blank node, so look it up as the node it is.
+        publisher_name = _first(graph, publisher, FOAF.name) or _first(graph, publisher, DCTERMS.title)
     return DatasetRecord(
         iri=iri,
         title=_first(graph, s, DCTERMS.title),
         description=_first(graph, s, DCTERMS.description),
-        publisher_iri=publisher,
+        publisher_iri=str(publisher) if isinstance(publisher, URIRef) else None,
         publisher_name=publisher_name,
         license=_first(graph, s, DCTERMS.license),
         access_rights=_first(graph, s, DCTERMS.accessRights),
         landing_page=_first(graph, s, DCAT.landingPage),
-        themes=_all(graph, s, DCAT.theme) + _all(graph, s, DCTERMS.theme),
+        themes=_all(graph, s, DCAT.theme),
         keywords=_all(graph, s, DCAT.keyword),
         distributions=_all(graph, s, DCAT.distribution),
         types=_all(graph, s, RDF.type),
@@ -171,17 +176,32 @@ def choose(distributions: Iterable[DistributionRecord]) -> DistributionRecord | 
     return None
 
 
+def _filename(response: requests.Response) -> str:
+    """The file name a server gives a download.
+
+    Content-Disposition wins, then the last path segment of the URL after
+    redirects (GEO and Zenodo both redirect to the real file), then the
+    media type.
+    """
+    disposition = response.headers.get("Content-Disposition", "")
+    match = re.search(r"filename\*?=(?:UTF-8'')?\"?([^\";]+)\"?", disposition, flags=re.I)
+    if match:
+        name = Path(unquote(match.group(1))).name
+    else:
+        name = Path(unquote(urlparse(response.url).path)).name
+    if not name or "." not in name:
+        ext = mimetypes.guess_extension(response.headers.get("Content-Type", "").split(";")[0]) or ""
+        name = (name or "download") + ext
+    return name
+
+
 def download(url: str, dest_dir: str | os.PathLike, session: requests.Session | None = None, timeout: int = 300) -> Path:
     """Stream a file to dest_dir and return its path. Gzipped files are unpacked."""
     dest_dir = Path(dest_dir)
     dest_dir.mkdir(parents=True, exist_ok=True)
-    name = Path(urlparse(url).path).name or "download"
     response = _session(session).get(url, stream=True, timeout=timeout)
     response.raise_for_status()
-    if "." not in name:
-        ext = mimetypes.guess_extension(response.headers.get("Content-Type", "").split(";")[0]) or ""
-        name += ext
-    path = dest_dir / name
+    path = dest_dir / _filename(response)
     with open(path, "wb") as fh:
         for chunk in response.iter_content(chunk_size=1 << 16):
             fh.write(chunk)
@@ -193,15 +213,32 @@ def download(url: str, dest_dir: str | os.PathLike, session: requests.Session | 
     return path
 
 
-def load_table(path: str | os.PathLike):
-    """Load a downloaded table into a pandas DataFrame, sniffing the delimiter."""
+def sheets(path: str | os.PathLike) -> list[str]:
+    """The sheet names of a workbook, or [] for a delimited text file."""
+    import pandas as pd
+
+    path = Path(path)
+    if path.suffix.lower() in {".xlsx", ".xls"}:
+        return list(pd.ExcelFile(path).sheet_names)
+    return []
+
+
+def load_table(path: str | os.PathLike, sheet: str | int | None = None):
+    """Load a downloaded table into a pandas DataFrame.
+
+    For a workbook, `sheet` picks the sheet (the first one by default). For
+    text, the delimiter is sniffed, except for .tsv and for GEO-style .txt
+    files whose first line is tab-separated.
+    """
     import pandas as pd
 
     path = Path(path)
     suffix = path.suffix.lower()
     if suffix in {".xlsx", ".xls"}:
-        return pd.read_excel(path)
-    if suffix == ".tsv":
+        return pd.read_excel(path, sheet_name=sheet if sheet is not None else 0)
+    with open(path, encoding="utf-8", errors="replace") as fh:
+        first = fh.readline()
+    if suffix == ".tsv" or "\t" in first:
         return pd.read_csv(path, sep="\t")
     return pd.read_csv(path, sep=None, engine="python")
 
@@ -212,7 +249,7 @@ def prov_graph(
     downloaded: Path,
     started: datetime,
     ended: datetime | None = None,
-    agent_iri: str = "https://github.com/ERDERA-demonstrators/D05-metadata-to-notebook",
+    agent_iri: str = AGENT_IRI,
 ) -> Graph:
     """A small PROV-O record of what the notebook fetched and produced."""
     ended = ended or datetime.now(timezone.utc)
@@ -222,7 +259,10 @@ def prov_graph(
     g.bind("dct", DCTERMS)
     run = URIRef(f"{agent_iri}#run-{started.strftime('%Y%m%dT%H%M%SZ')}")
     agent = URIRef(agent_iri)
-    local_file = URIRef(downloaded.resolve().as_uri())
+    # Named under the run rather than as a file:// URI, which would only mean
+    # something on the machine that ran the notebook.
+    local_file = URIRef(f"{run}/{downloaded.name}")
+    g.add((local_file, RDFS.label, Literal(downloaded.name)))
     g.add((agent, RDF.type, PROV.SoftwareAgent))
     g.add((run, RDF.type, PROV.Activity))
     g.add((run, PROV.wasAssociatedWith, agent))

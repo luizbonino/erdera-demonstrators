@@ -15,7 +15,7 @@
     dct:license <https://w3id.org/ejp-rd/resources/licenses/v1.0/> ;
     dct:accessRights <https://w3id.org/ejp-rd/resources/licenses/v1.0/> ;
     dcat:landingPage <{BASE}/landing.html> ;
-    dcat:theme <http://www.orpha.net/ORDO/Orphanet_93546> ;
+    dcat:theme <http://www.orpha.net/ORDO/Orphanet_93545> ;
     dcat:keyword "CAKUT", "proteome", "synthetic" ;
     ejprd:personalData "false" ;
     ejprd:vpConnection <https://w3id.org/ejp-rd/vocabulary#VPDiscoverable> ;

@@ -1,0 +1,27 @@
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://github.com/luizbonino/erdera-demonstrators/tree/main/demonstrators/D05-metadata-to-notebook#run-20261106T122808Z/GSE64810_mlhd_DESeq2_norm_counts_adjust.txt> a prov:Entity ;
+    rdfs:label "GSE64810_mlhd_DESeq2_norm_counts_adjust.txt" ;
+    prov:wasDerivedFrom <https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE64810&format=file&file=GSE64810%255Fmlhd%255FDESeq2%255Fnorm%255Fcounts%255Fadjust%252Etxt%252Egz> ;
+    prov:wasGeneratedBy <https://github.com/luizbonino/erdera-demonstrators/tree/main/demonstrators/D05-metadata-to-notebook#run-20261106T122808Z> .
+
+<https://github.com/luizbonino/erdera-demonstrators/tree/main/demonstrators/D05-metadata-to-notebook> a prov:SoftwareAgent .
+
+<https://github.com/luizbonino/erdera-demonstrators/tree/main/demonstrators/D05-metadata-to-notebook#run-20261106T122808Z> a prov:Activity ;
+    prov:endedAtTime "2026-11-06T12:28:12.891748+00:00"^^xsd:dateTime ;
+    prov:startedAtTime "2026-11-06T12:28:08.010747+00:00"^^xsd:dateTime ;
+    prov:used <https://w3id.org/ejp-rd/fairdatapoints/wp13/dataset/22238845-1213-43f6-a60f-e84cdc9fa2ed>,
+        <https://w3id.org/ejp-rd/fairdatapoints/wp13/distribution/9f91a17c-905a-4487-9ee2-57502fa7a452>,
+        <https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE64810&format=file&file=GSE64810%255Fmlhd%255FDESeq2%255Fnorm%255Fcounts%255Fadjust%252Etxt%252Egz> ;
+    prov:wasAssociatedWith <https://github.com/luizbonino/erdera-demonstrators/tree/main/demonstrators/D05-metadata-to-notebook> .
+
+<https://w3id.org/ejp-rd/fairdatapoints/wp13/dataset/22238845-1213-43f6-a60f-e84cdc9fa2ed> a prov:Entity ;
+    dct:title "Huntingtons disease transcriptomics" .
+
+<https://w3id.org/ejp-rd/fairdatapoints/wp13/distribution/9f91a17c-905a-4487-9ee2-57502fa7a452> a prov:Entity .
+
+<https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE64810&format=file&file=GSE64810%255Fmlhd%255FDESeq2%255Fnorm%255Fcounts%255Fadjust%252Etxt%252Egz> a prov:Entity .
+

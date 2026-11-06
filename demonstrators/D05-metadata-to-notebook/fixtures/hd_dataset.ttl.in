@@ -1,0 +1,18 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+# Shaped like the WP13 Huntington transcriptomics record (wp13/dataset/22238845-…):
+# the publisher is a blank node, and there are two distributions served as their
+# own resources, one with an access URL only and one with a download URL that
+# redirects (as GEO's /geo/download/ does) to a gzipped tab-separated matrix.
+
+<{BASE}/hd_dataset.ttl>
+    a dcat:Dataset, dcat:Resource ;
+    dct:title "SYNTHETIC Huntington disease transcriptomics (fixture)" ;
+    dct:description "A small synthetic count matrix standing in for GEO GSE64810. Fixture for the D5 demonstrator tests." ;
+    dct:publisher [ a foaf:Agent ; foaf:name "NCBI" ] ;
+    dct:license <https://creativecommons.org/licenses/by-nc/4.0/> ;
+    dcat:theme <http://www.orpha.net/ORDO/Orphanet_399> ;
+    dcat:keyword "huntington's disease", "transcriptomics", "synthetic" ;
+    dcat:distribution <{BASE}/hd_access.ttl>, <{BASE}/hd_download.ttl> .

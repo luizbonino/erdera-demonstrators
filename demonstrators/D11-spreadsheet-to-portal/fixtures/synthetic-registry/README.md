@@ -23,9 +23,11 @@ Deliberate choices, so the FDPlight import is exercised:
 
 Expected import result: zero red counts.
 
-To check before the recording: the ORDO IRI used as theme
-(`Orphanet_93546`) was chosen as a placeholder and must be verified against
-ORDO as the code for CAKUT, or replaced by the right one.
+The theme is `http://www.orpha.net/ORDO/Orphanet_93545`, "Renal or urinary
+tract malformation". ORDO has no single class named CAKUT. 93545 is the group
+that covers it, syndromic forms included. Its child `Orphanet_93546`
+("Non-syndromic renal or urinary tract malformation") was the earlier
+placeholder. Checked against ORDO in EBI OLS on 2026-11-06.
 
 Column headers follow the per-sheet template documentation. The official
 `.xlsx` template could not be downloaded when this fixture was written, so the

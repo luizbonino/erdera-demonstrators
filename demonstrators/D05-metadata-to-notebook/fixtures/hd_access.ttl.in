@@ -1,0 +1,8 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+
+<{BASE}/hd_access.ttl>
+    a dcat:Distribution ;
+    dct:title "Access distribution of the synthetic Huntington matrix" ;
+    dcat:mediaType "text/csv" ;
+    dcat:accessURL <{BASE}/geo/query/acc.cgi?acc=GSE0> .
